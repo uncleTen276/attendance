@@ -39,6 +39,7 @@ http://localhost:8080/api/v1
 
 <img width="1405" alt="Screenshot 2024-06-15 at 15 12 02" src="https://github.com/uncleTen276/greendeco/assets/72869134/aaf79330-b591-4c6a-b9ed-a0e4d8e66c9c">
 
+
 ### CMD
 - Compile file .sol
 ```sh
@@ -57,6 +58,12 @@ solc --abi <contract>.sol -o build
 npx hardhat node
 ```
 
+### DOC
+- [hardhat](https://hardhat.org)
+
+- [fiber](https://gofiber.io)
+
+- [abigen](https://geth.ethereum.org/docs/tools/abigen)
 
 
 
