@@ -1,0 +1,298 @@
+basePath: /api/v1
+definitions:
+  models.AttendaceUpdate:
+    properties:
+      check_in:
+        type: string
+      detail:
+        type: string
+      position:
+        type: string
+      record_id:
+        type: integer
+    required:
+    - check_in
+    - position
+    - record_id
+    type: object
+  models.AttendanceCheckIn:
+    properties:
+      check_in:
+        type: string
+      detail:
+        type: string
+      position:
+        type: string
+    required:
+    - check_in
+    - position
+    type: object
+  models.CreateUser:
+    properties:
+      firstName:
+        maxLength: 50
+        type: string
+      identifier:
+        maxLength: 100
+        type: string
+      lastName:
+        maxLength: 50
+        type: string
+      password:
+        maxLength: 50
+        minLength: 8
+        type: string
+    required:
+    - firstName
+    - identifier
+    - lastName
+    - password
+    type: object
+  models.ErrorResponse:
+    properties:
+      errors: {}
+      msg:
+        type: string
+    type: object
+  models.User:
+    properties:
+      firstName:
+        type: string
+      id:
+        type: integer
+      identifier:
+        type: string
+      lastName:
+        type: string
+    type: object
+  models.UserLogin:
+    properties:
+      identifier:
+        maxLength: 100
+        type: string
+      password:
+        maxLength: 50
+        minLength: 8
+        type: string
+    required:
+    - identifier
+    - password
+    type: object
+  models.UserToken:
+    properties:
+      access_Token:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: tringuyen2762001@gmail.com
+    name: Nguyen Tri
+  description: greendeco
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: Fiber Go API
+  version: "1.0"
+paths:
+  /attendance/:
+    get:
+      consumes:
+      - application/json
+      responses:
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "403":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "404":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      security:
+      - Bearer: []
+      summary: api use to get user attendance record
+      tags:
+      - Attendance
+    post:
+      consumes:
+      - application/json
+      description: 'check-in time should be format : 2024-06-15T08:00:00Z'
+      parameters:
+      - description: Check In position
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/models.AttendanceCheckIn'
+      responses:
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "403":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "404":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      security:
+      - Bearer: []
+      summary: api use for employee checkIn
+      tags:
+      - Attendance
+    put:
+      consumes:
+      - application/json
+      description: 'check-in time should be format : 2024-06-15T08:00:00Z'
+      parameters:
+      - description: update record
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/models.AttendaceUpdate'
+      responses:
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "403":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "404":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      security:
+      - Bearer: []
+      summary: api use to update attendaceRecord
+      tags:
+      - Attendance
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: use for login response the access_Token
+      parameters:
+      - description: Login
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserLogin'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserToken'
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "403":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "404":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: User Login
+      tags:
+      - Auth
+  /register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: New User
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "403":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "404":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: create new user
+      tags:
+      - Auth
+  /user/me:
+    get:
+      consumes:
+      - application/json
+      description: route get user Id from token then get user information
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "403":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "404":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      security:
+      - Bearer: []
+      summary: get user information by Id
+      tags:
+      - User
+securityDefinitions:
+  Bearer:
+    description: Type "Bearer" followed by a space and JWT token.
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

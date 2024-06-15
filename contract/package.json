@@ -1,0 +1,24 @@
+{
+  "name": "contract",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx hardhat node && npx hardhat run scripts/deploy.js",
+    "test": "npx hardhat test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uncleTen276/attendance.git"
+  },
+  "author": "tri nguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uncleTen276/attendance/issues"
+  },
+  "homepage": "https://github.com/uncleTen276/attendance#readme",
+  "description": "",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.5"
+  }
+}
