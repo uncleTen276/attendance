@@ -5,12 +5,18 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/joho/godotenv"
 	"github.com/uncleTen276/attendance.git/server/api/routes"
 	"github.com/uncleTen276/attendance.git/server/internal/configs"
 	"github.com/uncleTen276/attendance.git/server/internal/postgresql"
 )
 
 func Serve() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	if err := configs.LoadConfig(); err != nil {
 		log.Fatal("cannot load config", err)
 	}

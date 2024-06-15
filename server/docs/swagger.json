@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "greendeco",
+        "description": "employee attendance",
         "title": "Fiber Go API",
         "contact": {
             "name": "Nguyen Tri",
